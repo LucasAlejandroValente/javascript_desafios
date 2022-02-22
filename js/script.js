@@ -5,7 +5,7 @@
 // Mostrar cálculo final
 // Abonar monto
 
-const bienvenida = () => {
+/* const bienvenida = () => {
     alert(`¡Bienvenido a mi tienda virtual!`);
 };
 
@@ -106,3 +106,104 @@ init()
 seleccionCuotas();
 calcularCuotas(cuotasSeleccionadas, total);
 confirmacionPago()
+
+*/
+
+let arrayProductos = [
+    {
+        id: 1,
+        nombre: "Torta de Chocolate",
+        precio: 3000,
+    },
+
+    {
+        id: 2,
+        nombre: "Torta de Zanahoria",
+        precio: 2500,
+    },
+
+    {
+        id: 3,
+        nombre: "Torta Oreo",
+        precio: 3500,
+    },
+
+    {
+        id: 4, 
+        nombre: "Torta Red Velvet",
+        precio: 4000,
+    },
+
+    {
+        id: 5, 
+        nombre: "Torta de Coco",
+        precio: 3250,
+    },
+
+];
+
+const bienvenida = () => {
+    alert("Bienvenido a mi pastelería!");
+};
+
+const catalogo = function () {
+    let productos;
+
+    do {
+        productos = parseInt(prompt("¿Qué tortas querés comprar?\n\n1. Torta de Chocolate\n2. Torta de zanahoria\n3. Torta Oreo\n4. Torta Red Velvet\n5. Torta de Coco"));
+    } while (isNaN(productos) || productos < 1 || productos > 5);
+
+    return arrayProductos[productos - 1];
+
+}
+
+const calcularPrecio = (productoElegido) => {
+    return productoElegido.precio
+}
+
+let texto = "";
+let total = 0;
+
+const mostrarPrecio = (productoElegido) => {
+    texto += `Has elegido:\n${productoElegido.nombre}.\nPrecio: $${productoElegido.precio}.\n\n`
+    total += productoElegido.precio
+
+    let seguir = confirm("¿Querés comprar otro producto?")
+    if (seguir === true){
+        init()
+    } else {
+        alert(texto);
+        alert(`El total a pagar es de $${total}.`)
+    }
+    
+};
+
+let cuotasSeleccionadas;
+
+const seleccionCuotas = () => {
+    do {
+        cuotasSeleccionadas = parseInt(prompt(`¿En cuántas cuotas querés efectuar el pago?\n\nOpciones: de 1 a 12 cuotas.`))
+    } while (cuotasSeleccionadas < 1 || cuotasSeleccionadas > 12)
+    return cuotasSeleccionadas
+}
+
+const calcularCuotas = (cuotasSeleccionadas, total) => {
+    alert(`Elegiste pagar en ${cuotasSeleccionadas} cuota(s).`)
+    alert(`El monto se pagará en ${cuotasSeleccionadas} cuota(s) de $${total / cuotasSeleccionadas}.`)
+}
+
+const init = () => {
+    let productoElegido = catalogo();
+    calcularPrecio(productoElegido);
+    mostrarPrecio(productoElegido)
+};
+
+const confirmacionPago = () => {
+    confirm("Presiona confirmar para efectuar el pago.")
+}
+
+bienvenida();
+init()
+seleccionCuotas();
+calcularCuotas(cuotasSeleccionadas, total);
+confirmacionPago();
